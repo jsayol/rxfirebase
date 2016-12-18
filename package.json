@@ -1,0 +1,69 @@
+{
+  "name": "@jsayol/rxfirebase",
+  "version": "0.0.1-alpha.0",
+  "description": "RxJS wrapper with extra goodies for the Firebase JavaScript SDK",
+  "author": "Josep Sayol",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jsayol/rxfirebase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jsayol/rxfirebase/issues"
+  },
+  "homepage": "https://github.com/jsayol/rxfirebase#readme",
+  "keywords": [
+    "rxjs",
+    "firebase",
+    "observable",
+    "reactive"
+  ],
+  "files": [
+    "build"
+  ],
+  "main": "dist/cjs/RxFirebase.js",
+  "typings": "dist/cjs/RxFirebase.d.ts",
+  "scripts": {
+    "build_all": "npm-run-all lint_src build_cjs build_global generate_packages",
+    "build_cjs": "npm-run-all clean_dist_cjs copy_src_cjs compile_dist_cjs",
+    "build_es6": "npm-run-all clean_dist_es6 copy_src_es6 compile_module_es6",
+    "build_global": "npm-run-all clean_dist_global build_es6 && mkdirp ./dist/global && npm-run-all make_umd_bundle make_closure_core",
+    "clean_dist_cjs": "shx rm -rf ./dist/cjs",
+    "clean_dist_es6": "shx rm -rf ./dist/es6",
+    "clean_dist_global": "shx rm -rf ./dist/global",
+    "copy_src_cjs": "mkdirp ./dist/cjs/src && shx cp -r ./src/* ./dist/cjs/src",
+    "copy_src_es6": "mkdirp ./dist/es6/src && shx cp -r ./src/* ./dist/es6/src",
+    "compile_dist_cjs": "tsc -p ./tsconfig.cjs.json",
+    "compile_module_es6": "tsc -p ./tsconfig.es6.json",
+    "make_umd_bundle": "node ./tools/make-umd-bundle.js",
+    "make_closure_core": "node ./tools/make-closure-core.js",
+    "generate_packages": "node ./tools/make-packages.js",
+    "lint_src": "tslint --force --format verbose \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "firebase": "^3.6.4",
+    "rxjs": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "3.4.30",
+    "@types/mocha": "2.2.33",
+    "@types/node": "6.0.52",
+    "chai": "^3.5.0",
+    "google-closure-compiler-js": "^20161201.0.0",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.0.1",
+    "npm-run-all": "^3.1.2",
+    "rollup": "^0.37.0",
+    "rollup-plugin-commonjs": "^6.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "shx": "^0.2.1",
+    "ts-node": "^1.2.2",
+    "tslib": "^1.2.0",
+    "tslint": "4.1.1",
+    "typescript": "2.1.4"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  }
+}

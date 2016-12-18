@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "umd",
+    "target": "es5",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./dist/umd",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "diagnostics": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "es5",
+      "es2015.iterable",
+      "es2015.collection",
+      "es2015.promise",
+      "dom"
+    ]
+  },
+  "files": [
+    "./src/index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*-spec.ts"
+  ]
+}

@@ -1,0 +1,36 @@
+### IDE ###
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.settings
+
+
+### Build files ###
+dist/
+
+
+### Node ###
+# Logs
+logs/
+*.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Yarn Integrity file
+.yarn-integrity
+
+
+### Other ###
+.DS_Store
