@@ -43,38 +43,40 @@ const firebaseConfig = {
 
 RxFirebase.initializeApp(firebaseConfig);
 
-RxFirebase.database.ref('/items')
-  .onChildAdded()
-  .subscribe(snapshot => {
-    console.log(`Child added with key ${snapshot.key} and value ${snapshot.val()}`);
-  });
+const items$ = RxFirebase.database.ref('/items').onChildAdded();
 
-RxFirebase.database.ref('/super/secret/items')
+$items.subscribe(snapshot => {
+  console.log(`Child added with key ${snapshot.key} and value ${snapshot.val()}`);
+});
+
+const secretItems$ = RxFirebase.database.ref('/super/secret/items')
   .afterSignIn()
   .untilSignOut()
   .getValue()
-  .onChildRemoved()
-  .subscribe(item => {
-    // Using getValue() emits the value itself instead of the snapshot.
-    // It's equivalent to calling snapshot.val()
-    console.log(`Child removed with value ${item}`);
-  });
+  .onChildRemoved();
+  
+secretItems$.subscribe(item => {
+  // Using getValue() emits the value itself instead of the snapshot.
+  // It's equivalent to calling snapshot.val()
+  console.log(`Child removed with value ${item}`);
+});
 
-RxFirebase.auth.onSignIn$.subscribe((auth: RxFirebaseUser) => {
+const userPostsOnSignIn$ = RxFirebase.auth.onSignIn$.switchMap(auth =>
   RxFirebase.database.ref(`/userPosts/${auth.uid}`)
     .asList()
     .untilSignOut()
     .once('value')
-    .subscribe(posts => {
-      console.log(`This user has ${posts.length} posts.`);
-      if (posts.length > 0) {
-        // Using asList() emits the data as an Array with the key for each item stored as item.$key
-        // If the value is an Object then "item" is the value itself, otherwise
-        // it is stored in item.$value (for strings, numbers, and booleans)
-        const post = posts[0];
-        console.log(`The title for the first post, with key ${post.$key}, is "${post.title}"`);
-      }
-    });
+);
+
+userPostsOnSignIn$.subscribe(posts => {
+  console.log(`This user has ${posts.length} posts.`);
+  if (posts.length > 0) {
+    // Using asList() emits the data as an Array with the key for each item stored as item.$key
+    // If the value is an Object then "item" is the value itself, otherwise
+    // it is stored in item.$value (for strings, numbers, and booleans)
+    const post = posts[0];
+    console.log(`The title for the first post, with key ${post.$key}, is "${post.title}"`);
+  }
 });
 
 RxFirebase.auth.isSignedIn$.subscribe(isSignedIn => {
