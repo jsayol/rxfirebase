@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import { Observable, Subscriber } from 'rxjs';
 import { RxFirebase } from '../RxFirebase';
 import { RxFirebaseDatabase } from './database';
@@ -59,7 +60,6 @@ export class RxFirebaseDatabaseRef {
         for (let key in value) {
           if (value.hasOwnProperty(key)) {
             let element = value[key];
-            console.log(`asList key ${key} = ${element}`);
 
             if (typeof element !== 'object') {
               element = {$value: element};
@@ -69,6 +69,8 @@ export class RxFirebaseDatabaseRef {
             array.push(element);
           }
         }
+
+        return array;
       });
     }
 
