@@ -1,19 +1,9 @@
-
 # RxFirebase
-*Status: Alpha*
-
-RxJS wrapper with extra goodies for the Firebase JavaScript SDK.
+[![npm version](https://badge.fury.io/js/rxfirebase.svg)](https://www.npmjs.com/package/rxfirebase)
 
 [Apache 2.0 License](LICENSE.txt)
 
-## TO-DO
-- [ ] **Add tests**
-- [x] Auth support
-- [x] Database support
-- [ ] Storage support
-- [ ] Messaging support
-- [ ] Fix building of UMD module (CommonJS, AMD)
-
+RxJS wrapper with extra goodies for the Firebase JavaScript SDK.
 
 ## Installation
 
@@ -97,3 +87,12 @@ setTimeout(() => {
 ### UMD (CommonJS, AMD)
 
 Coming soon
+
+
+## TO-DO
+- [ ] **Add tests**
+- [x] Auth support
+- [x] Database support
+- [ ] Storage support
+- [ ] Messaging support
+- [ ] Fix building of UMD module (CommonJS, AMD)
