@@ -45,7 +45,7 @@ RxFirebase.initializeApp(firebaseConfig);
 
 const items$ = RxFirebase.database.ref('/items').onChildAdded();
 
-$items.subscribe(snapshot => {
+items$.subscribe(snapshot => {
   console.log(`Child added with key ${snapshot.key} and value ${snapshot.val()}`);
 });
 
